@@ -1,7 +1,6 @@
 package com.niles.dscatalog.resources;
 
-import com.niles.dscatalog.entities.Category;
-import com.niles.dscatalog.repositories.CategoryRepository;
+import com.niles.dscatalog.dto.CategoryDto;
 import com.niles.dscatalog.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,9 +15,10 @@ import java.util.List;
 public class CategoryResources {
     @Autowired
     private CategoryService service;
+
     @GetMapping
-    public ResponseEntity<List<Category>> findAll(){
-        List<Category> list = service.findAll();
+    public ResponseEntity<List<CategoryDto>> findAll() {
+        List<CategoryDto> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 }
