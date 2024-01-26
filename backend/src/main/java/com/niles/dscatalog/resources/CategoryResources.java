@@ -27,10 +27,17 @@ public class CategoryResources {
         CategoryDto dto = service.findById(id);
         return ResponseEntity.ok().body(dto);
     }
+
     @PostMapping
-    public ResponseEntity<CategoryDto> insert(@RequestBody CategoryDto dto){
+    public ResponseEntity<CategoryDto> insert(@RequestBody CategoryDto dto) {
         dto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<CategoryDto> update(@PathVariable Long id, @RequestBody CategoryDto dto) {
+        dto = service.update(id, dto);
+        return ResponseEntity.ok().body(dto);
     }
 }
