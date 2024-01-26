@@ -5,8 +5,10 @@ import com.niles.dscatalog.entities.Category;
 import com.niles.dscatalog.repositories.CategoryRepository;
 import com.niles.dscatalog.services.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,5 +30,11 @@ public class CategoryService {
         Optional<Category> obj = repository.findById(id);
         Category entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity not found"));
         return new CategoryDto(entity);
+    }
+
+    public CategoryDto insert(CategoryDto dto){
+        Category entity = repository.save(new Category(dto));
+        return new CategoryDto(entity);
+
     }
 }

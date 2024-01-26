@@ -1,5 +1,6 @@
 package com.niles.dscatalog.entities;
 
+import com.niles.dscatalog.dto.CategoryDto;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -19,6 +20,10 @@ public class Category implements Serializable {
     public Category(Long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Category(CategoryDto dto) {
+        this.name = dto.getName();
     }
 
     public Long getId() {
