@@ -92,4 +92,8 @@ public class ProductDto implements Serializable {
     public void setDate(Instant date) {
         this.date = date;
     }
+
+    public List<CategoryDto> getCategories() {
+        return categories;
+    }
 }

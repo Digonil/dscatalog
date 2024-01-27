@@ -1,5 +1,6 @@
 package com.niles.dscatalog.entities;
 
+import com.niles.dscatalog.dto.ProductDto;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -36,6 +37,24 @@ public class Product implements Serializable {
         this.price = price;
         this.imgUrl = imgUrl;
         this.date = date;
+    }
+
+    public Product(Long id, String name, String description, Double price, String imgUrl, Instant date) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.imgUrl = imgUrl;
+        this.date = date;
+    }
+
+    public Product(ProductDto dto) {
+        this.id = dto.getId();
+        this.name = dto.getName();
+        this.description = dto.getDescription();
+        this.price = dto.getPrice();
+        this.imgUrl = dto.getImgUrl();
+        this.date = dto.getDate();
     }
 
     public Long getId() {
