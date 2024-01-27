@@ -1,14 +1,10 @@
 package com.niles.dscatalog.resources.exceptions;
 
-import com.niles.dscatalog.dto.CategoryDto;
 import com.niles.dscatalog.dto.ProductDto;
-import com.niles.dscatalog.entities.Product;
-import com.niles.dscatalog.services.CategoryService;
 import com.niles.dscatalog.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -23,15 +19,8 @@ public class ProductResources {
 
 
     @GetMapping
-    public ResponseEntity<Page<ProductDto>> findAll(
-            @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
-            @RequestParam(value = "direction", defaultValue = "ASC") String direction,
-            @RequestParam(value = "orderBy", defaultValue = "name") String orderBy
-    ) {
-       PageRequest pageRequest =  PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-
-        Page<ProductDto> list = service.findAllPaged(pageRequest);
+    public ResponseEntity<Page<ProductDto>> findAll(Pageable pageable) {
+        Page<ProductDto> list = service.findAllPaged(pageable);
         return ResponseEntity.ok().body(list);
     }
 
